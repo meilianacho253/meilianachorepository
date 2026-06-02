@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meiliana Choiriyah – Resume</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:      #1a1a2e;
+      --mid:      #3d3d5c;
+      --muted:    #7a7a9a;
+      --accent:   #c8843a;
+      --accent2:  #e6a95a;
+      --bg:       #faf9f6;
+      --surface:  #f2efe8;
+      --rule:     #d6d1c4;
+      --serif:    'Playfair Display', Georgia, serif;
+      --sans:     'DM Sans', system-ui, sans-serif;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    /* ── Page shell ── */
+    .page {
+      max-width: 820px;
+      margin: 2.5rem auto;
+      background: #fff;
+      box-shadow: 0 4px 32px rgba(26,26,46,.10);
+      border-top: 5px solid var(--accent);
+    }
+
+    /* ── Header ── */
+    header {
+      padding: 2.8rem 3rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1.5rem;
+      align-items: start;
+      background: var(--surface);
+      border-bottom: 1px solid var(--rule);
+    }
+    .header-text h1 {
+      font-family: var(--serif);
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: .02em;
+      color: var(--ink);
+      line-height: 1.1;
+    }
+    .header-text .contact {
+      margin-top: .5rem;
+      font-size: 13px;
+      color: var(--mid);
+      display: flex;
+      flex-wrap: wrap;
+      gap: .3rem .9rem;
+    }
+    .header-text .contact a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px dotted var(--accent2);
+    }
+    .header-text .summary {
+      margin-top: 1rem;
+      font-size: 13.5px;
+      color: var(--mid);
+      max-width: 580px;
+      line-height: 1.7;
+    }
+    .header-photo {
+      width: 110px;
+      height: 110px;
+      border-radius: 4px;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+      display: none; /* hidden since no actual image file */
+    }
+
+    /* ── Main layout ── */
+    main {
+      padding: 2.4rem 3rem 3rem;
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2.4rem 3rem;
+    }
+    .left  { min-width: 0; }
+    .right { min-width: 0; }
+
+    /* ── Section titles ── */
+    .section { margin-bottom: 2rem; }
+    .section-title {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding-bottom: .35rem;
+      border-bottom: 1.5px solid var(--rule);
+      margin-bottom: 1.1rem;
+    }
+
+    /* ── Experience entries ── */
+    .entry { margin-bottom: 1.5rem; }
+    .entry:last-child { margin-bottom: 0; }
+    .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: .2rem;
+    }
+    .entry-org {
+      font-size: 12.5px;
+      color: var(--muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+    .entry-role {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin: .1rem 0 .4rem;
+    }
+    .entry-date {
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .entry ul {
+      list-style: none;
+      padding: 0;
+    }
+    .entry ul li {
+      padding-left: 1.1rem;
+      position: relative;
+      margin-bottom: .25rem;
+      font-size: 13px;
+      color: var(--mid);
+      line-height: 1.6;
+    }
+    .entry ul li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent2);
+      font-size: 10px;
+      top: .25rem;
+    }
+
+    /* ── Education ── */
+    .edu-item { margin-bottom: 1rem; }
+    .edu-degree {
+      font-weight: 500;
+      color: var(--ink);
+      font-size: 13.5px;
+    }
+    .edu-school {
+      font-size: 12.5px;
+      color: var(--muted);
+    }
+    .edu-gpa {
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* ── Skills sidebar ── */
+    .skill-group { margin-bottom: 1.3rem; }
+    .skill-group-title {
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--ink);
+      margin-bottom: .45rem;
+    }
+    .tag-row { display: flex; flex-wrap: wrap; gap: .3rem; }
+    .tag {
+      font-size: 11.5px;
+      padding: .2rem .6rem;
+      border-radius: 2px;
+      background: var(--surface);
+      color: var(--mid);
+      border: 1px solid var(--rule);
+    }
+    .tag.accent {
+      background: #fdf0e0;
+      border-color: var(--accent2);
+      color: #8b5a1a;
+    }
+
+    /* ── Awards ── */
+    .award-item {
+      font-size: 13px;
+      color: var(--mid);
+      padding: .3rem 0;
+      border-bottom: 1px dashed var(--rule);
+      line-height: 1.55;
+    }
+    .award-item:last-child { border-bottom: none; }
+
+    /* ── STEM Projects ── */
+    .project-item {
+      margin-bottom: .8rem;
+      padding: .6rem .8rem;
+      background: var(--surface);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 3px 3px 0;
+      font-size: 12.5px;
+      color: var(--mid);
+      line-height: 1.55;
+    }
+    .project-item strong {
+      display: block;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--accent);
+      margin-bottom: .2rem;
+    }
+
+    /* ── Org list ── */
+    .org-list { list-style: none; padding: 0; }
+    .org-list li {
+      font-size: 12.5px;
+      color: var(--mid);
+      padding: .2rem 0 .2rem 1rem;
+      position: relative;
+    }
+    .org-list li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--accent2);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 680px) {
+      header { grid-template-columns: 1fr; padding: 1.8rem 1.5rem 1.5rem; }
+      main   { grid-template-columns: 1fr; padding: 1.5rem; gap: 1.5rem; }
+      .header-text h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ══ HEADER ══ -->
+  <header>
+    <div class="header-text">
+      <h1>Meiliana Choiriyah</h1>
+      <div class="contact">
+        <a href="mailto:meilianacho11@gmail.com">meilianacho11@gmail.com</a>
+        <a href="https://linkedin.com/in/meiliana-choiriyah" target="_blank">linkedin.com/meiliana choiriyah</a>
+      </div>
+      <p class="summary">
+        Over eight years of experience as an International teacher and laboratory associate teacher,
+        teaching Science and Biology from Upper Primary to High School levels under international
+        curricula — CAIE (IGCSE &amp; AS/A Level Cambridge), Pearson Edexcel, and IB MYP — in
+        Indonesia. Currently building a career as an Academic and Training Specialist in an EdTech company.
+      </p>
+    </div>
+  </header>
+
+  <!-- ══ MAIN CONTENT ══ -->
+  <main>
+
+    <!-- ── LEFT COLUMN ── -->
+    <div class="left">
+
+      <!-- EXPERIENCE -->
+      <div class="section">
+        <div class="section-title">Professional Experience</div>
+
+        <div class="entry">
+          <div class="entry-org">Beeducation Adventures Sdn Bhd, Malaysia</div>
+          <div class="entry-header">
+            <div class="entry-role">Academic and Training Specialist</div>
+            <span class="entry-date">Dec 2025 – Present</span>
+          </div>
+          <ul>
+            <li>Research and keep up to date with the latest trends in education, technology, and EdTech solutions.</li>
+            <li>Create and review multimedia-rich educational content based on tech-pedagogical guidelines.</li>
+            <li>Develop creative templates tailored to specific industries; serve as a knowledge resource for consultations.</li>
+            <li>Write pedagogical-supported, academic-focused articles for blog and broadcasting materials.</li>
+            <li>Conduct onboarding and training on the EdTech platform.</li>
+            <li>Support the Sales &amp; Marketing team at conferences and fairs from an educational perspective.</li>
+          </ul>
+        </div>
+
+        <div class="entry">
+          <div class="entry-org">Sekolah Victory Plus</div>
+          <div class="entry-header">
+            <div class="entry-role">IB MYP Biology Teacher</div>
+            <span class="entry-date">Aug – Nov 2025</span>
+          </div>
+          <ul>
+            <li>Delivered MYP Biology lessons aligned with the IB Programme for Year 5 students.</li>
+            <li>Designed unit plans, managed the classroom, and created formative/summative assessments.</li>
+            <li>Maintained lesson plans and class content through ManageBac.</li>
+          </ul>
+        </div>
+
+        <div class="entry">
+          <div class="entry-org">Pelangi School Bali</div>
+          <div class="entry-header">
+            <div class="entry-role">Upper Primary &amp; Lower Secondary Science Teacher</div>
+            <span class="entry-date">Jan – Jul 2025</span>
+          </div>
+          <ul>
+            <li>Taught Science under the IMYC and Pearson Edexcel iLS frameworks.</li>
+            <li>Provided ESL and Mathematics tutoring for non-native foreign students.</li>
+          </ul>
+        </div>
+
+        <div class="entry">
+          <div class="entry-org">BINUS SCHOOL Bekasi</div>
+          <div class="entry-header">
+            <div class="entry-role">Biology Lab. Ass. Teacher &amp; Research Club Head</div>
+            <span class="entry-date">Jul 2019 – Jun 2024</span>
+          </div>
+          <ul>
+            <li>Taught and assisted students (Grades 7–12) in lab activities under IGCSE and AS/A Level Cambridge.</li>
+            <li>Trained students on STEM projects through Project-Based Learning.</li>
+            <li>Led the Research Club across Science, Mathematics, and Humanities departments.</li>
+            <li>Prepared students for the National Biology Olympiad and ICAS.</li>
+            <li>Managed lab equipment/materials and oversaw laboratory safety conditions.</li>
+            <li>Coordinated practicum activities and communicated with procurement and vendors.</li>
+          </ul>
+        </div>
+
+        <div class="entry">
+          <div class="entry-org">SPK Sekolah Pelita Bangsa</div>
+          <div class="entry-header">
+            <div class="entry-role">Shadow Teacher for Special Needs</div>
+            <span class="entry-date">Jul 2018 – Jun 2019</span>
+          </div>
+          <ul>
+            <li>Assisted a special needs student, instilling responsibility, independence, and a love of learning.</li>
+            <li>Collaborated with class teachers and parents to monitor and support student progress.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- STEM PROJECTS -->
+      <div class="section">
+        <div class="section-title">STEM Student Projects (Supervised)</div>
+
+        <div class="project-item">
+          <strong>1st Place · SYRA 2020</strong>
+          Double Protection PPE using chitosan and herbal essential oil as an antiviral agent via reverse specification technique.
+        </div>
+        <div class="project-item">
+          <strong>2nd Place · SYRA 2021</strong>
+          Green tea in a chitosan biofilm forming solution for antiviral and antibacterial packaging protection.
+        </div>
+        <div class="project-item">
+          <strong>1st Place · SYRA 2022</strong>
+          Nebulizer with air-pollution filter using cellulose from paper waste and Metal-Oxide materials via xerogel/Sol-Gel process.
+        </div>
+        <div class="project-item">
+          <strong>Winner · SEAMEO STEM-ED, Bangkok</strong>
+          Nebulizer air filter from paper tissue and coffee waste to trap specific air-pollutant gases.
+        </div>
+      </div>
+
+      <!-- ORGANIZATIONS -->
+      <div class="section">
+        <div class="section-title">Organization &amp; Leadership</div>
+        <ul class="org-list">
+          <li>Head of Research Club, BINUS SCHOOL Bekasi</li>
+          <li>PIC for school events under WCS (Welfare, Care &amp; Service) Committee</li>
+          <li>PIC for company field trips</li>
+          <li>HIMABIO IPB – Badan Pengawas (supervisory board)</li>
+          <li>Head of Entrepreneurship Committee – Pesta Sains Nasional IPB, IPB Green Living Movement, IPB Goes to School, Green Festival IPB</li>
+          <li>Volunteer Educator – Kelas Inspirasi Cirebon, Majalengka, and Tegal</li>
+        </ul>
+      </div>
+
+    </div><!-- /left -->
+
+    <!-- ── RIGHT COLUMN ── -->
+    <div class="right">
+
+      <!-- EDUCATION -->
+      <div class="section">
+        <div class="section-title">Education</div>
+        <div class="edu-item">
+          <div class="edu-degree">B.Sc. in Biology, Minor in Communication</div>
+          <div class="edu-school">IPB University</div>
+          <div class="edu-gpa">GPA: 3.37 / 4.00</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-degree">B.Ed. in Biology Education</div>
+          <div class="edu-school">National Open University (UT)</div>
+          <div class="edu-gpa">GPA: 3.58 / 4.00</div>
+        </div>
+      </div>
+
+      <!-- CURRICULUM EXPERTISE -->
+      <div class="section">
+        <div class="section-title">Curriculum Expertise</div>
+        <div class="skill-group">
+          <div class="tag-row">
+            <span class="tag accent">Cambridge IGCSE</span>
+            <span class="tag accent">AS/A Level</span>
+            <span class="tag accent">IB MYP</span>
+            <span class="tag">Pearson Edexcel</span>
+            <span class="tag">IMYC</span>
+            <span class="tag">Indonesian Nat. Curriculum</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TECH & TOOLS -->
+      <div class="section">
+        <div class="section-title">Tech &amp; Tools</div>
+        <div class="skill-group">
+          <div class="skill-group-title">LMS &amp; EdTech</div>
+          <div class="tag-row">
+            <span class="tag">ManageBac+</span>
+            <span class="tag">BeEd World</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Content &amp; Training</div>
+          <div class="tag-row">
+            <span class="tag">Educational Content Creation</span>
+            <span class="tag">Product Training</span>
+            <span class="tag">Blog Writing</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Laboratory</div>
+          <div class="tag-row">
+            <span class="tag accent">ISO 17025:2017</span>
+            <span class="tag accent">Good Lab Practice</span>
+            <span class="tag">Lab Management</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- HONORS & AWARDS -->
+      <div class="section">
+        <div class="section-title">Honors &amp; Awards</div>
+        <div class="award-item">🥇 1st Place, National Business Plan — Agrifest 2016, Hasanuddin University</div>
+        <div class="award-item">🏆 Top-20 Finalist, Animal Science National Competition, Brawijaya University</div>
+        <div class="award-item">🎓 PPA Scholarship — Ministry of Research &amp; Technology, Republic of Indonesia</div>
+        <div class="award-item">🌏 Adviser Achievement Award — STEM Fair &amp; Expo 2023, Bangkok, Thailand</div>
+        <div class="award-item">✈️ AFS Global STEM Educator Scholarship — AFS Intercultural Programs</div>
+        <div class="award-item">📄 Presenter — International Conference on Math &amp; Science Education 2022 (STEM track)</div>
+      </div>
+
+    </div><!-- /right -->
+
+  </main>
+</div>
+</body>
+</html>
